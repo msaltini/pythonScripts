@@ -1,15 +1,15 @@
-import decode64
+import binascii
 
-def xor_brute():
-    x = input("Strinhg to crack")
-    cipher = decode64.decode(x)
-    plain = ""
+def xor_brute(x):
+    xToHex = binascii.unhexlify(x)
+    plain = []
     
-    for i in range(0,256):
-        for letter in cipher:
-            plain += chr(ord(letter) ^ i)
-        print(plain)
-        plain =""
+    for key in range(256):
+        for num in xToHex:
+            plain.append(chr(num ^ key))
+        print(''.join(plain))
+        plain = []
 
-xor_brute()
+cipher = input("String to crack:")
+xor_brute(cipher)
 
